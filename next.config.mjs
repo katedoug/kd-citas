@@ -1,18 +1,6 @@
 import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@clerk/shared/devBrowser': false,
-    }
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      crypto: false,
-    }
-    return config
-  },
-};
+const nextConfig = {};
 
 export default withSentryConfig(nextConfig, {
   // For all available options, see:
