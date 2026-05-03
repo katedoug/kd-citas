@@ -43,12 +43,16 @@ const config: Config = {
       },
       keyframes: {
         fadeIn:      { from: { opacity: '0' }, to: { opacity: '1' } },
+        stepIn:      { from: { transform: 'translateX(18px)', opacity: '0' }, to: { transform: 'translateX(0)', opacity: '1' } },
+        stepBack:    { from: { transform: 'translateX(-18px)', opacity: '0' }, to: { transform: 'translateX(0)', opacity: '1' } },
         sheetIn:     { from: { transform: 'translateY(20px) scale(0.98)', opacity: '0' }, to: { transform: 'translateY(0) scale(1)', opacity: '1' } },
         slideUpFade: { from: { transform: 'translate(-50%,30px)', opacity: '0' }, to: { transform: 'translate(-50%,0)', opacity: '1' } },
         newApptIn:   { '0%': { transform: 'scale(1.05)', opacity: '0' }, '60%': { transform: 'scale(0.98)', opacity: '1' }, '100%': { transform: 'scale(1)', opacity: '1' } },
       },
       animation: {
         'fade-in':     'fadeIn 200ms cubic-bezier(0.32,0.72,0.0,1)',
+        'step-in':     'stepIn 260ms cubic-bezier(0.22,1,0.36,1)',
+        'step-back':   'stepBack 260ms cubic-bezier(0.22,1,0.36,1)',
         'sheet-in':    'sheetIn 320ms cubic-bezier(0.22,1,0.36,1)',
         'slide-up':    'slideUpFade 280ms cubic-bezier(0.22,1,0.36,1)',
         'new-appt':    'newApptIn 400ms cubic-bezier(0.34,1.56,0.64,1)',

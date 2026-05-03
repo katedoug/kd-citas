@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [step, setStep] = useState<'email' | 'password'>('email')
+  const [direction, setDirection] = useState<'forward' | 'back'>('forward')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -17,6 +18,7 @@ export default function LoginPage() {
     e.preventDefault()
     if (!email.trim()) return
     setError('')
+    setDirection('forward')
     setStep('password')
   }
 
@@ -41,6 +43,11 @@ export default function LoginPage() {
           <Image src="/logo-kateandoug-wordmark.svg" alt="Kate&Doug" width={110} height={34} />
         </div>
 
+        <div
+          key={step}
+          className={direction === 'forward' ? 'animate-step-in' : 'animate-step-back'}
+          style={{ overflow: 'hidden' }}
+        >
         {step === 'email' ? (
           <>
             <div>
@@ -116,7 +123,7 @@ export default function LoginPage() {
           <>
             <div>
               <button
-                onClick={() => { setStep('email'); setError('') }}
+                onClick={() => { setDirection('back'); setStep('email'); setError('') }}
                 className="text-[13px] font-semibold mb-4 bg-transparent border-none cursor-pointer p-0"
                 style={{ color: '#000' }}
               >
@@ -150,6 +157,7 @@ export default function LoginPage() {
             </form>
           </>
         )}
+        </div>
       </div>
     </div>
   )
