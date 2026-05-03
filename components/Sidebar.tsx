@@ -2,8 +2,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { X, CalendarCheck, History, ListChecks, Clock, Settings, CircleHelp, Bell, CalendarOff, Flag } from 'lucide-react'
-import { SignedIn, UserButton } from '@clerk/nextjs'
+import { LogOut } from 'lucide-react'
 import { useApp } from '@/context/AppContext'
+import { useAuthCtx } from '@/context/AuthContext'
 
 const ITEMS = [
   { href: '/citas',     label: 'Citas en vivo',   Icon: CalendarCheck },
@@ -16,6 +17,7 @@ const ITEMS = [
 
 export function Sidebar() {
   const { sidebarOpen, setSidebarOpen, triggerNewApptDemo, forceEmpty, setForceEmpty } = useApp()
+  const { user, signOut } = useAuthCtx()
   const pathname = usePathname()
   const close = () => setSidebarOpen(false)
 
@@ -101,12 +103,20 @@ export function Sidebar() {
             <Flag size={16} />
             Reportar problema
           </button>
-          <SignedIn>
+          {user && (
             <div className="mt-3 flex items-center gap-3 px-1">
-              <UserButton afterSignOutUrl="/login" />
-              <div className="text-[12px] text-fg2 font-medium font-sans">Mi cuenta</div>
+              <div className="w-8 h-8 rounded-pill bg-kd-lavender flex items-center justify-center text-[12px] font-bold text-kd-persian flex-shrink-0">
+                {user.email?.[0]?.toUpperCase() ?? '?'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[12px] text-fg1 font-semibold truncate">{user.email}</div>
+              </div>
+              <button onClick={signOut} title="Cerrar sesión"
+                className="w-7 h-7 flex items-center justify-center rounded-pill border-none bg-transparent cursor-pointer text-fg3 hover:text-fg1">
+                <LogOut size={14} />
+              </button>
             </div>
-          </SignedIn>
+          )}
           <div className="mt-[10px] text-[11px] text-fg3 text-center">Kate&amp;Doug · v2.0 · Modo clínica</div>
         </div>
       </aside>

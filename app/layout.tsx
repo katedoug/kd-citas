@@ -1,9 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
 import type { Metadata } from 'next'
-import { ClerkProvider } from '@clerk/nextjs'
-import { esMX } from '@clerk/localizations'
 import './globals.css'
 import { AppProvider } from '@/context/AppContext'
+import { AuthProvider } from '@/context/AuthContext'
 import { ClientShell } from '@/components/ClientShell'
 
 export function generateMetadata(): Metadata {
@@ -20,11 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
-        <ClerkProvider localization={esMX as Parameters<typeof ClerkProvider>[0]['localization']}>
+        <AuthProvider>
           <AppProvider>
             <ClientShell>{children}</ClientShell>
           </AppProvider>
-        </ClerkProvider>
+        </AuthProvider>
       </body>
     </html>
   )

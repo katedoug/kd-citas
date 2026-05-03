@@ -1,26 +1,30 @@
 'use client'
 import { useEffect } from 'react'
-import { useAuth } from '@clerk/nextjs'
 import { useRouter, usePathname } from 'next/navigation'
+import { useAuthCtx } from '@/context/AuthContext'
 import { useApp } from '@/context/AppContext'
 import { Sidebar } from './Sidebar'
 import { Toast } from './shared/Toast'
 import { NewAppointmentAlert } from './NewAppointmentAlert'
 
 export function ClientShell({ children }: { children: React.ReactNode }) {
-  const { isLoaded, userId } = useAuth()
+  const { isLoaded, user } = useAuthCtx()
   const router = useRouter()
   const pathname = usePathname()
   const { toast, newAlertAppt, setNewAlertAppt, handleCancel, handleOpenFromAlert } = useApp()
 
   useEffect(() => {
-    if (isLoaded && !userId && !pathname.startsWith('/login')) {
+    if (isLoaded && !user && !pathname.startsWith('/login')) {
       router.replace('/login')
     }
-  }, [isLoaded, userId, pathname, router])
+  }, [isLoaded, user, pathname, router])
 
-  if (!isLoaded || (!userId && !pathname.startsWith('/login'))) {
+  if (!isLoaded || (!user && !pathname.startsWith('/login'))) {
     return null
+  }
+
+  if (pathname.startsWith('/login')) {
+    return <>{children}</>
   }
 
   return (

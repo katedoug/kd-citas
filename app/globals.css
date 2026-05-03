@@ -67,7 +67,7 @@
   --border-accent: var(--kd-persian-blue);
 
   /* ── Type ── */
-  --font-display: 'Kaluar', system-ui, -apple-system, sans-serif;
+  --font-display: 'TT Norms Pro', system-ui, -apple-system, sans-serif;
   --font-sans:    'TT Norms Pro', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
