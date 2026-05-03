@@ -72,7 +72,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={!email.trim()}
                 className="w-full py-[15px] rounded-[8px] text-[16px] font-bold border-none cursor-pointer"
-                style={{ background: email.trim() ? '#000' : '#e0e0e0', color: email.trim() ? '#fff' : '#999' }}
+                style={{ background: email.trim() ? '#1434CB' : '#e0e0e0', color: email.trim() ? '#fff' : '#999' }}
               >
                 Continuar
               </button>
@@ -150,7 +150,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={loading || !password}
                 className="w-full py-[15px] rounded-[8px] text-[16px] font-bold border-none cursor-pointer"
-                style={{ background: password && !loading ? '#000' : '#e0e0e0', color: password && !loading ? '#fff' : '#999' }}
+                style={{ background: password && !loading ? '#1434CB' : '#e0e0e0', color: password && !loading ? '#fff' : '#999' }}
               >
                 {loading ? 'Iniciando sesión…' : 'Iniciar sesión'}
               </button>
