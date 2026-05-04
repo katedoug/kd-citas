@@ -56,7 +56,7 @@ export default function LoginPage() {
       setLoading(false)
     } else {
       await new Promise(r => setTimeout(r, 2500))
-      router.replace('/')
+      router.replace('/citas')
     }
   }
 
