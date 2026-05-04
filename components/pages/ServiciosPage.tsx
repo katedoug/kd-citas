@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
-import * as Icons from 'lucide-react'
-import { Info, SlidersHorizontal, Timer, X, ListChecks } from 'lucide-react'
+import { Info, SlidersHorizontal, Timer, X, ListChecks, Syringe, TestTube, FlaskConical, Microscope, Sparkles, ShieldCheck, Stethoscope, type LucideIcon } from 'lucide-react'
+
+const ICON_MAP: Record<string, LucideIcon> = { Syringe, TestTube, FlaskConical, Microscope, Sparkles, ShieldCheck, Stethoscope }
 import { PageChrome } from './PageChrome'
 import type { ServiceCatalogItem } from '@/lib/types'
 
@@ -96,7 +97,7 @@ export function ServiciosPage() {
 
           <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
             {list.map(s => {
-              const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[s.icon]
+              const Icon = ICON_MAP[s.icon]
               return (
                 <div key={s.id} className="bg-bg-elevated border border-border rounded-[16px] p-[18px] transition-opacity"
                   style={{ opacity: s.enabled ? 1 : 0.55 }}>

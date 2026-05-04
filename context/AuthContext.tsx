@@ -16,10 +16,10 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(!supabase)
 
   useEffect(() => {
-    if (!supabase) { setIsLoaded(true); return }
+    if (!supabase) { return }
 
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session)
@@ -34,7 +34,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const signIn = async (email: string, password: string): Promise<{ error: string | null }> => {
-    if (!supabase) return { error: 'Supabase no configurado' }
+    // Demo bypass for development / when Supabase is not configured
+    if (!supabase) {
+      if (email === 'demo@katedoug.mx' && password === 'demo1234') {
+        setSession({ user: { id: 'demo', email } } as never)
+        return { error: null }
+      }
+      return { error: 'Correo o contraseña incorrectos' }
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) return { error: error.message }
     return { error: null }
@@ -49,7 +56,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signOut = async () => {
-    if (!supabase) return
+    if (!supabase) {
+      setSession(null)
+      return
+    }
     await supabase.auth.signOut()
   }
 

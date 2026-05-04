@@ -1,6 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import Image from 'next/image'
 import { useAuthCtx } from '@/context/AuthContext'
 import { useApp } from '@/context/AppContext'
 import { Sidebar } from './Sidebar'
@@ -20,7 +21,13 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   }, [isLoaded, user, pathname, router])
 
   if (!isLoaded || (!user && !pathname.startsWith('/login'))) {
-    return null
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-8">
+        <Image src="/SVG/partners-logo.svg" alt="Kate&Doug for Vets" width={200} height={50} priority />
+        <div style={{ width: 28, height: 28, borderRadius: '50%', border: '2.5px solid #e0e0e0', borderTopColor: '#1434CB', animation: 'spin 700ms linear infinite' }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    )
   }
 
   if (pathname.startsWith('/login')) {

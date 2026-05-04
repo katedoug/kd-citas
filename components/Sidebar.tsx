@@ -111,8 +111,8 @@ export function Sidebar() {
               <div className="flex-1 min-w-0">
                 <div className="text-[12px] text-fg1 font-semibold truncate">{user.email}</div>
               </div>
-              <button onClick={signOut} title="Cerrar sesión"
-                className="w-7 h-7 flex items-center justify-center rounded-pill border-none bg-transparent cursor-pointer text-fg3 hover:text-fg1">
+              <button onClick={() => { close(); signOut() }} title="Cerrar sesión"
+                className="w-7 h-7 flex items-center justify-center rounded-pill border-none bg-transparent cursor-pointer text-fg3 hover:text-fg1 transition-colors duration-150">
                 <LogOut size={14} />
               </button>
             </div>
