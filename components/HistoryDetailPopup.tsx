@@ -68,6 +68,7 @@ function PastEntry({ e }: { e: HistoryEntry }) {
             <div className="flex gap-2 flex-wrap">
               {e.photos.map((p, i) => (
                 <div key={i} className="w-[64px] h-[64px] rounded-[8px] overflow-hidden" style={{ background: 'var(--kd-parchment-700)' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.preview} alt={p.name} className="w-full h-full object-cover" />
                 </div>
               ))}
@@ -152,6 +153,7 @@ export function HistoryDetailPopup({ entry, onClose }: Props) {
                 {entry.photos.map((photo, i) => (
                   <div key={i}>
                     <div className="rounded-[10px] overflow-hidden" style={{ aspectRatio: '1/1', background: 'var(--kd-parchment-700)' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={photo.preview} alt={photo.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="text-[10px] text-fg2 mt-1 overflow-hidden text-ellipsis whitespace-nowrap">{photo.name}</div>

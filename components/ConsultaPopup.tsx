@@ -122,6 +122,7 @@ export function ConsultaPopup({ appt, onClose, onComplete }: Props) {
                     {photos.map(photo => (
                       <div key={photo.id} className="relative">
                         <div className="rounded-[10px] overflow-hidden relative" style={{ aspectRatio: '1/1', background: 'var(--kd-parchment-700)' }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={photo.preview} alt={photo.name} className="w-full h-full object-cover" />
                           {photo.progress < 100 && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center gap-[6px] px-3" style={{ background: 'rgba(3,0,39,0.52)' }}>
