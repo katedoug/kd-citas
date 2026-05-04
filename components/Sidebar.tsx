@@ -17,7 +17,7 @@ const ITEMS = [
 
 export function Sidebar() {
   const { sidebarOpen, setSidebarOpen, triggerNewApptDemo, forceEmpty, setForceEmpty } = useApp()
-  const { user, signOut } = useAuthCtx()
+  const { user, signOut, activeClinic } = useAuthCtx()
   const pathname = usePathname()
   const close = () => setSidebarOpen(false)
 
@@ -50,8 +50,10 @@ export function Sidebar() {
                 —
               </div>
               <div>
-                <div className="font-display font-semibold text-[18px] leading-tight text-fg1">Mi clínica</div>
-                <div className="text-[12px] text-fg3">Configura en Vet Manager</div>
+                <div className="font-display font-semibold text-[18px] leading-tight text-fg1">
+                  {activeClinic?.organization_name ?? 'Mi clínica'}
+                </div>
+                <div className="text-[12px] text-fg3">{activeClinic?.name ?? 'Configura en Vet Manager'}</div>
               </div>
             </div>
             <button onClick={close} className="w-9 h-9 rounded-pill border-none bg-kd-parchment cursor-pointer flex items-center justify-center">
