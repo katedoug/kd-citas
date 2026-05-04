@@ -4,8 +4,6 @@ import { CirclePlay, Pause, Clock } from 'lucide-react'
 import { PageChrome } from './PageChrome'
 import type { ScheduleRow } from '@/lib/types'
 
-const DAYS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
-
 const SCHEDULE_DEV: ScheduleRow[] = [
   { day: 'Lunes',     open: '09:00', close: '20:00', closed: false },
   { day: 'Martes',    open: '09:00', close: '20:00', closed: false },
