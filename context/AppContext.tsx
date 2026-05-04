@@ -138,20 +138,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const triggerNewApptDemo = useCallback(() => {
     setSidebarOpen(false)
-    let target = appts.find(a => a.status === 'por_confirmar' && a.isNew)
-    if (!target) {
-      target = appts.find(a => a.status === 'proxima')
-      if (target) updateAppt(target.id, { status: 'por_confirmar', isNew: true })
+    const demoAppt: Appointment = {
+      id: `DEMO-${Date.now()}`,
+      code: '#KD-2099',
+      status: 'por_confirmar',
+      isNew: true,
+      pet: { name: 'Milo', species: 'Perro', breed: 'Golden Retriever', age: '3 años', sex: 'M', weight: '28 kg', avatar: 'M', color: '#B5651D' },
+      owner: { name: 'Carlos', initials: 'CA' },
+      services: ['consulta'],
+      specifics: {},
+      note: 'Cita de prueba — no es real.',
+      plan: 'Básico',
+      start: new Date(),
+      durationMin: 30,
+      arrivedAt: null,
     }
-    if (target) {
-      setNewAlertAppt({ ...target, status: 'por_confirmar', isNew: true })
-      try {
-        const audio = new Audio('/dog-bark.mp3')
-        audio.volume = 0.8
-        setTimeout(() => audio.play().catch(() => {}), 250)
-      } catch {}
-    }
-  }, [appts, updateAppt])
+    setNewAlertAppt(demoAppt)
+    try {
+      const audio = new Audio('/dog-bark.mp3')
+      audio.volume = 0.8
+      setTimeout(() => audio.play().catch(() => {}), 250)
+    } catch {}
+  }, [])
 
   const handleOpenFromAlert = useCallback(() => {
     setOpenAppt(newAlertAppt)
