@@ -15,12 +15,16 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const { toast, newAlertAppt, setNewAlertAppt, handleCancel, handleOpenFromAlert } = useApp()
 
   useEffect(() => {
-    if (isLoaded && !user && !pathname.startsWith('/login')) {
-      router.replace('/login')
+    if (isLoaded && !user && pathname !== '/') {
+      router.replace('/')
     }
   }, [isLoaded, user, pathname, router])
 
-  if (!isLoaded || (!user && !pathname.startsWith('/login'))) {
+  if (pathname === '/') {
+    return <>{children}</>
+  }
+
+  if (!isLoaded || !user) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-8">
         <Image src="/SVG/partners-logo.svg" alt="Kate&Doug for Vets" width={200} height={50} priority />
@@ -28,10 +32,6 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     )
-  }
-
-  if (pathname.startsWith('/login')) {
-    return <>{children}</>
   }
 
   return (
