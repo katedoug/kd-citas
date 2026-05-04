@@ -19,9 +19,8 @@ export const STATUS_META: Record<string, StatusMeta> = {
   cancelada:     { label: 'Cancelada',     color: '#B3261E', bg: '#FCE9E7', dot: '#B3261E' },
 }
 
-// ── Development-only mock data ───────────────────────────────────────────────
+// ── Mock data ────────────────────────────────────────────────────────────────
 
-const isDev = process.env.NODE_ENV === 'development'
 
 function dShift(base: Date, days: number, hour: number, min = 0): Date {
   const d = new Date(base)
@@ -210,9 +209,9 @@ function buildMockHistory(): HistoryEntry[] {
   ]
 }
 
-export const APPOINTMENTS: Appointment[] = isDev ? buildMockAppointments() : []
-export const STATIC_HISTORY: HistoryEntry[] = isDev ? buildMockHistory() : []
-export const TODAY: Date = isDev ? new Date(2026, 4, 4) : new Date()
+export const APPOINTMENTS: Appointment[] = buildMockAppointments()
+export const STATIC_HISTORY: HistoryEntry[] = buildMockHistory()
+export const TODAY: Date = new Date(2026, 4, 4)
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 

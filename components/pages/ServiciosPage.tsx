@@ -6,7 +6,6 @@ const ICON_MAP: Record<string, LucideIcon> = { Syringe, TestTube, FlaskConical, 
 import { PageChrome } from './PageChrome'
 import type { ServiceCatalogItem } from '@/lib/types'
 
-const isDev = process.env.NODE_ENV === 'development'
 
 const CATALOG_DEV: ServiceCatalogItem[] = [
   { id: 'vacuna',     label: 'Vacunación',       desc: 'Aplicación de vacunas según cartilla.',       icon: 'Syringe',      mins: 20, prep: 'Sin requisitos especiales.',                   enabled: true },
@@ -63,7 +62,7 @@ function DurationModal({ service, onSave, onClose }: { service: ServiceCatalogIt
 }
 
 export function ServiciosPage() {
-  const [list, setList] = useState<ServiceCatalogItem[]>(isDev ? CATALOG_DEV : [])
+  const [list, setList] = useState<ServiceCatalogItem[]>(CATALOG_DEV)
   const [editing, setEditing] = useState<ServiceCatalogItem | null>(null)
 
   const toggle = (id: string) => setList(l => l.map(s => s.id === id ? { ...s, enabled: !s.enabled } : s))
