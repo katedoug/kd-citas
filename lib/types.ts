@@ -60,6 +60,7 @@ export interface HistoryEntry {
   diagnostico?: string | null
   receta?: string | null
   photos?: { name: string; preview: string }[]
+  vacuna?: VacunaData | null
 }
 
 export interface ServiceCatalogItem {
@@ -79,8 +80,15 @@ export interface ScheduleRow {
   closed: boolean
 }
 
+export interface VacunaData {
+  nombre: string
+  aplicadaEn: string   // ISO date string YYYY-MM-DD
+  proximaEn: string | null
+}
+
 export interface ConsultaData {
   diagnostico: string
   receta: string | null
   photos: { name: string; preview: string }[]
+  vacuna: VacunaData | null
 }

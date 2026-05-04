@@ -115,11 +115,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     showToast('Llegada registrada', 'door-open')
   }, [updateAppt, showToast])
 
-  const handleCompleteConsulta = useCallback((a: Appointment, { diagnostico, receta, photos }: ConsultaData) => {
+  const handleCompleteConsulta = useCallback((a: Appointment, { diagnostico, receta, photos, vacuna }: ConsultaData) => {
     setAppts(list => list.filter(appt => appt.id !== a.id))
     setConsultaAppt(null)
     setOpenAppt(null)
-    pushToHistorial(a, 'completada', { diagnostico, receta, photos })
+    pushToHistorial(a, 'completada', { diagnostico, receta, photos, vacuna })
     showToast('Consulta completada', 'check-check')
   }, [pushToHistorial, showToast])
 
