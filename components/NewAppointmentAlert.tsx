@@ -1,4 +1,6 @@
 'use client'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { SERVICES, fmtTime, relDayLabel } from '@/lib/data'
 import type { Appointment } from '@/lib/types'
@@ -11,10 +13,13 @@ interface Props {
 }
 
 export function NewAppointmentAlert({ appt, onView, onDismiss, onReject }: Props) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
   const serviceLabel = appt.services.map(sid => SERVICES[sid]?.label).filter(Boolean).join(' · ')
 
-  return (
-    <div className="fixed inset-0 z-[80] flex flex-col items-center justify-center text-white text-center px-8 py-6 animate-new-appt"
+  const content = (
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center text-white text-center px-8 py-6 animate-new-appt"
       style={{ background: '#1F7A4D' }}>
       <button onClick={onDismiss}
         className="absolute top-6 right-6 w-[52px] h-[52px] rounded-pill border-none flex items-center justify-center cursor-pointer"
@@ -55,4 +60,7 @@ export function NewAppointmentAlert({ appt, onView, onDismiss, onReject }: Props
       </div>
     </div>
   )
+
+  if (!mounted) return null
+  return createPortal(content, document.body)
 }
