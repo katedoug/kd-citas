@@ -45,9 +45,9 @@ export function HistorialPage() {
       {openEntry && <HistoryDetailPopup entry={openEntry} onClose={() => setOpenEntry(null)} />}
 
       {/* Stats */}
-      <div className="flex gap-3 flex-wrap mb-[22px]">
+      <div className="grid grid-cols-2 gap-3 mb-[22px]">
         {stats.map(({ label, value, Icon, color }) => (
-          <div key={label} className="flex-1 min-w-[140px] bg-bg-elevated border border-border rounded-[16px] p-4">
+          <div key={label} className="bg-bg-elevated border border-border rounded-[16px] p-4">
             <div className="w-9 h-9 rounded-[10px] bg-kd-lavender flex items-center justify-center" style={{ color }}>
               <Icon size={18} strokeWidth={1.85} />
             </div>
@@ -75,25 +75,26 @@ export function HistorialPage() {
               const isCancel = h.tag === 'cancelada'
               return (
                 <div key={i} onClick={() => setOpenEntry(h)}
-                  className="bg-bg-elevated border border-border rounded-[14px] px-4 py-[14px] grid gap-[14px] items-center cursor-pointer transition-shadow"
-                  style={{ gridTemplateColumns: '140px 1fr auto' }}
+                  className="bg-bg-elevated border border-border rounded-[14px] p-4 flex flex-col gap-[6px] cursor-pointer transition-shadow"
                   onMouseEnter={e => (e.currentTarget.style.boxShadow = 'var(--shadow-sm)')}
                   onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
                 >
-                  <div className="text-[12px] text-fg2 font-medium">{h.date}</div>
-                  <div>
-                    <div className="font-display font-bold text-[17px] tracking-[-0.01em]">
-                      {h.pet} <span className="text-fg2 text-[13px] font-medium">· {h.breed}</span>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="font-display font-bold text-[16px] tracking-[-0.01em] leading-snug">
+                        {h.pet} <span className="text-fg2 text-[13px] font-medium">· {h.breed}</span>
+                      </div>
+                      <div className="text-[13px] text-fg2 mt-[2px] leading-snug">{h.service} · con {h.owner}</div>
                     </div>
-                    <div className="text-[13px] text-fg2 mt-[2px]">{h.service} · con {h.owner}</div>
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      <span className="text-[11px] font-bold tracking-[0.06em] uppercase px-[10px] py-[5px] rounded-pill whitespace-nowrap"
+                        style={{ background: isCancel ? '#FCE9E7' : '#E5F4EC', color: isCancel ? '#B3261E' : '#1F7A4D' }}>
+                        {isCancel ? 'Cancelada' : 'Completada'}
+                      </span>
+                      <ChevronRight size={16} className="text-fg3 flex-shrink-0" />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold tracking-[0.06em] uppercase px-[10px] py-[5px] rounded-pill"
-                      style={{ background: isCancel ? '#FCE9E7' : '#E5F4EC', color: isCancel ? '#B3261E' : '#1F7A4D' }}>
-                      {isCancel ? 'Cancelada' : 'Completada'}
-                    </span>
-                    <ChevronRight size={16} className="text-fg3" />
-                  </div>
+                  <div className="text-[12px] text-fg2 font-medium">{h.date}</div>
                 </div>
               )
             })}

@@ -4,8 +4,6 @@ import { CirclePlay, Pause, Clock } from 'lucide-react'
 import { PageChrome } from './PageChrome'
 import type { ScheduleRow } from '@/lib/types'
 
-const isDev = process.env.NODE_ENV === 'development'
-
 const DAYS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
 
 const SCHEDULE_DEV: ScheduleRow[] = [
@@ -70,7 +68,7 @@ function TimeSelector({ value, onChange }: { value: string; onChange: (v: string
 }
 
 export function HorariosPage() {
-  const [schedule, setSchedule] = useState(isDev ? SCHEDULE_DEV : SCHEDULE_EMPTY)
+  const [schedule, setSchedule] = useState(SCHEDULE_DEV)
   const [pause, setPause] = useState(false)
   const update = (i: number, patch: Partial<ScheduleRow>) =>
     setSchedule(s => s.map((r, idx) => idx === i ? { ...r, ...patch } : r))
@@ -125,7 +123,7 @@ export function HorariosPage() {
       </div>
 
       <div className="mt-[22px] flex justify-end gap-[10px]">
-        <button onClick={() => setSchedule(isDev ? SCHEDULE_DEV : SCHEDULE_EMPTY)}
+        <button onClick={() => setSchedule(SCHEDULE_DEV)}
           className="px-[22px] py-3 rounded-pill border border-border bg-transparent cursor-pointer font-sans text-[14px] font-semibold text-fg1">
           Restablecer
         </button>

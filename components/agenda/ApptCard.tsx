@@ -1,6 +1,7 @@
 'use client'
-import * as Icons from 'lucide-react'
-import { MessageSquare, ChevronRight } from 'lucide-react'
+import { MessageSquare, ChevronRight, Syringe, TestTube, FlaskConical, Microscope, Sparkles, ShieldCheck, Stethoscope, type LucideIcon } from 'lucide-react'
+
+const ICON_MAP: Record<string, LucideIcon> = { Syringe, TestTube, FlaskConical, Microscope, Sparkles, ShieldCheck, Stethoscope }
 import { SERVICES, fmtTime, totalDuration } from '@/lib/data'
 import { StatusPill } from '../shared/StatusPill'
 import type { Appointment } from '@/lib/types'
@@ -67,7 +68,7 @@ export function ApptCard({ appt, onOpen, isNext = false }: Props) {
         {appt.services.map(sid => {
           const s = SERVICES[sid]
           if (!s) return null
-          const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[s.icon]
+          const Icon = ICON_MAP[s.icon]
           return (
             <span key={sid} className="inline-flex items-center gap-[5px] px-[10px] py-[5px] rounded-pill text-[12px] font-semibold leading-none"
               style={{

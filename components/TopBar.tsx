@@ -34,7 +34,7 @@ export function TopBar() {
         ))}
       </div>
 
-      <div className="flex items-center gap-[10px] text-fg2 text-[13px] font-medium flex-shrink-0">
+      <div className="hidden sm:flex items-center gap-[10px] text-fg2 text-[13px] font-medium flex-shrink-0">
         <Clock size={16} />
         <span>{time}</span>
       </div>
