@@ -16,7 +16,6 @@ const SCHEDULE_DEV: ScheduleRow[] = [
   { day: 'Domingo',   open: '10:00', close: '14:00', closed: true  },
 ]
 
-const SCHEDULE_EMPTY: ScheduleRow[] = DAYS.map(day => ({ day, open: '09:00', close: '18:00', closed: true }))
 
 function TimeSelector({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [open, setOpen] = useState(false)
